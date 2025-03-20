@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algoritmos Fundamentais</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+  <div class="container mt-5 p-4 bg-white rounded shadow">
+    <h1 class="text-center text-primary">Algoritmos Fundamentais</h1>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <h2 class="text-center text-info">Java</h2>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBU" target="_blank">Número é primo</a></li>
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBZ" target="_blank">Somatório</a></li>
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBW" target="_blank">Fibonacci</a></li>
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBX" target="_blank">Máximo divisor comum</a>
+          </li>
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBY" target="_blank">Ordenação
+              (Quicksort)</a></li>
+          <li class="list-group-item"><a href="https://www.jdoodle.com/ia/1EBN" target="_blank">Contagem</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-center text-info">JavaScript</h2>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('primo')">Número é primo</a></li>
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('somatorio')">Somatório</a></li>
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('fibonacci')">Fibonacci</a></li>
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('mdc')">Máximo divisor comum</a></li>
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('quicksort')">Ordenação (Quicksort)</a>
+          </li>
+          <li class="list-group-item"><a href="#" onclick="executarAlgoritmo('contagem')">Contagem</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-4 p-3 bg-secondary text-white text-center rounded">
+      <h3>Resultado:</h3>
+      <p id="resultado" class="mt-2"></p>
+    </div>
+  </div>
+
+  <script>
+    function executarAlgoritmo(tipo) {
+      let resultado = '';
+      switch (tipo) {
+        case 'primo':
+          let n = prompt("Digite um número:");
+          resultado = isPrime(parseInt(n)) ? "É primo" : "Não é primo";
+          break;
+        case 'somatorio':
+          let valores = prompt("Digite números separados por vírgula:").split(',').map(Number);
+          resultado = valores.reduce((acc, val) => acc + val, 0);
+          break;
+        case 'fibonacci':
+          let num = parseInt(prompt("Digite N para a sequência de Fibonacci:"));
+          resultado = fibonacci(num).join(', ');
+          break;
+        case 'mdc':
+          let a = parseInt(prompt("Digite o primeiro número:"));
+          let b = parseInt(prompt("Digite o segundo número:"));
+          resultado = mdc(a, b);
+          break;
+        case 'quicksort':
+          let arr = prompt("Digite números separados por vírgula:").split(',').map(Number);
+          resultado = quicksort(arr).join(', ');
+          break;
+        case 'contagem':
+          let entrada = prompt("Digite números separados por vírgula:").split(',').map(Number);
+          resultado = entrada.length;
+          break;
+      }
+      document.getElementById("resultado").innerText = resultado;
+    }
+
+    function isPrime(num) {
+      if (num <= 1) return false;
+      for (let i = 2; i < num; i++) {
+        if (num % i === 0) return false;
+      }
+      return true;
+    }
+
+    function fibonacci(n) {
+      let fib = [0, 1];
+      for (let i = 2; i < n; i++) {
+        fib.push(fib[i - 1] + fib[i - 2]);
+      }
+      return fib;
+    }
+
+    function mdc(a, b) {
+      while (b !== 0) {
+        let temp = b;
+        b = a % b;
+        a = temp;
+      }
+      return a;
+    }
+
+    function quicksort(arr) {
+      if (arr.length <= 1) return arr;
+      let pivot = arr[Math.floor(arr.length / 2)];
+      let left = arr.filter(x => x < pivot);
+      let middle = arr.filter(x => x === pivot);
+      let right = arr.filter(x => x > pivot);
+      return [...quicksort(left), ...middle, ...quicksort(right)];
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
